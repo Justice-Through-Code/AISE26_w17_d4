@@ -50,7 +50,7 @@ class CLIPRetriever:
             print(f"Indexed: {img_path.name}")
 
         self.image_embeddings = np.vstack(embeddings)
-        print(f"\n✅ Indexing complete. {len(self.image_paths)} images ready for search.\n")
+        print(f"\n[OK] Indexing complete. {len(self.image_paths)} images ready for search.\n")
 
     def search(self, query_text, top_k=5):
         """Search for images matching the text query."""
@@ -111,8 +111,8 @@ def demo_clip_retrieval():
         # Analyze results
         top_score = results[0][1]
         if top_score < 0.6:
-            print(f"\n⚠️  Low Confidence: Top score is {top_score:.3f}")
-            print("    Consider triggering fallback UX")
+            print(f"\n[WARNING] Low Confidence: Top score is {top_score:.3f}")
+            print("           Consider triggering fallback UX")
 
     print("\n" + "=" * 60)
     print("Demo complete!")

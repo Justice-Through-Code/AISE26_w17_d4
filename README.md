@@ -4,7 +4,7 @@ This repository contains working code examples demonstrated during W17D4 class s
 
 ## Quick Start
 
-### 1. Clone and Setup
+1. Clone and Setup
 
 ```bash
 # Clone repository
@@ -39,6 +39,7 @@ python demos/02_image_captioning.py
 **File:** `demos/01_clip_retrieval.py`
 
 **What it does:**
+
 - Loads CLIP model (ViT-B/32)
 - Encodes images into embeddings
 - Accepts text queries and retrieves top-k similar images
@@ -58,6 +59,7 @@ for img_path, score in results:
 ```
 
 **Key Teaching Points:**
+
 - CLIP enables zero-shot retrieval (no training needed)
 - Similarity scores are interpretable (0-1 range)
 - Blurred images have lower scores
@@ -68,6 +70,7 @@ for img_path, score in results:
 **File:** `demos/02_image_captioning.py`
 
 **What it does:**
+
 - Loads BLIP image captioning model
 - Generates text captions for images
 - Demonstrates hallucination risk on low-quality images
@@ -84,6 +87,7 @@ print(f"Caption: {caption}")
 ```
 
 **Key Teaching Points:**
+
 - Captions are fluent and natural-sounding
 - Model can hallucinate objects not in the image
 - Confidence scores help, but aren't foolproof
@@ -107,6 +111,7 @@ jtc-w17d4-demos/
 ## Dependencies
 
 **Core Requirements:**
+
 ```
 transformers>=4.36.0
 torch>=2.1.0
@@ -115,6 +120,7 @@ numpy>=1.24.0
 ```
 
 **Optional (for Jupyter notebooks):**
+
 ```
 jupyter>=1.0.0
 matplotlib>=3.7.0
@@ -124,16 +130,17 @@ matplotlib>=3.7.0
 
 Each demo maps to specific learning objectives:
 
-| Demo | Learning Objective |
-|------|-------------------|
-| CLIP Retrieval | Explain dual encoders and shared embedding space |
-| CLIP Retrieval | Understand similarity scoring and top-k retrieval |
+| Demo            | Learning Objective                                            |
+| --------------- | ------------------------------------------------------------- |
+| CLIP Retrieval  | Explain dual encoders and shared embedding space              |
+| CLIP Retrieval  | Understand similarity scoring and top-k retrieval             |
 | BLIP Captioning | Contrast retrieval (safer) vs generation (hallucination risk) |
-| All Demos | Use Transformers pipelines for reproducible inference |
+| All Demos       | Use Transformers pipelines for reproducible inference         |
 
 ## Next Steps for Students
 
 After running these demos, you should:
+
 1. Modify queries/images to test edge cases
 2. Use this code as a starting point for your assignment
 3. Add stress testing (blur, low-light) to your own implementations
@@ -142,15 +149,18 @@ After running these demos, you should:
 ## Troubleshooting
 
 **Model download slow?**
+
 - Models will download automatically on first run
 - CLIP: ~600 MB, BLIP: ~1 GB
 - Pre-download before class if possible
 
 **GPU not detected?**
+
 - Demos work fine on CPU (just slower)
 - Expect 2-5 seconds per image on CPU
 
 **Import errors?**
+
 - Run `pip install -r requirements.txt` again
 - Make sure you're in the virtual environment
 

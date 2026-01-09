@@ -7,11 +7,17 @@ Demonstrates:
 - Hallucination risks on low-quality images
 """
 
+import sys
+import io
 import torch
 import numpy as np
 from PIL import Image
 from transformers import BlipProcessor, BlipForConditionalGeneration
 from pathlib import Path
+
+# Configure UTF-8 output for Windows emoji support
+if sys.platform == 'win32':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 
 class ImageCaptioner:
