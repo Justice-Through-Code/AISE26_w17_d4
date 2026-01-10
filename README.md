@@ -4,31 +4,63 @@ This repository contains working code examples demonstrated during W17D4 class s
 
 ## Quick Start
 
-1. Clone and Setup
+### 1. Clone and Setup
+
+#### Clone repository
 
 ```bash
-# Clone repository
-git clone https://github.com/your-org/jtc-w17d4-demos.git
+git clone <https://github.com/your-org/jtc-w17d4-demos.git>
 cd jtc-w17d4-demos
+```
 
-# Create virtual environment
+#### Create virtual environment
+
+**Mac/Linux:**
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**Windows (Command Prompt):**
+
+```cmd
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+venv\Scripts\activate
+```
 
-# Install dependencies
+**Windows (PowerShell):**
+
+```powershell
+python -m venv venv
+.\venv\Scripts\Activate.ps1
+```
+
+> **Note:** On Windows PowerShell, you may need to run `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` if you encounter execution policy errors.
+
+#### Install dependencies
+
+```bash
 pip install -r requirements.txt
+```
 
-# Download sample images (or use your own)
+#### Download sample images (or use your own)
+
+```bash
 python demos/utils.py --download-samples
 ```
 
 ### 2. Run Demos
 
-```bash
-# Demo 1: CLIP Text-to-Image Retrieval
-python demos/01_clip_retrieval.py
+**Demo 1: CLIP Text-to-Image Retrieval**
 
-# Demo 2: Image Captioning with BLIP
+```bash
+python demos/01_clip_retrieval.py
+```
+
+**Demo 2: Image Captioning with BLIP**
+
+```bash
 python demos/02_image_captioning.py
 ```
 
@@ -81,7 +113,6 @@ for img_path, score in results:
 from demos.image_captioning import ImageCaptioner
 
 captioner = ImageCaptioner(model_name="Salesforce/blip-image-captioning-base")
-
 caption = captioner.caption_image("data/images/dog_clear.jpg")
 print(f"Caption: {caption}")
 ```
@@ -97,20 +128,20 @@ print(f"Caption: {caption}")
 
 ```
 jtc-w17d4-demos/
-├── README.md                          # This file
-├── requirements.txt                   # Python dependencies
+├── README.md                    # This file
+├── requirements.txt             # Python dependencies
 ├── data/
-│   └── images/                        # Sample images for testing
+│   └── images/                  # Sample images for testing
 ├── demos/
-│   ├── 01_clip_retrieval.py          # CLIP text-to-image retrieval
-│   ├── 02_image_captioning.py        # BLIP image captioning
-│   └── utils.py                       # Shared utility functions
-└── outputs/                           # Generated outputs (created at runtime)
+│   ├── 01_clip_retrieval.py    # CLIP text-to-image retrieval
+│   ├── 02_image_captioning.py  # BLIP image captioning
+│   └── utils.py                # Shared utility functions
+└── outputs/                     # Generated outputs (created at runtime)
 ```
 
 ## Dependencies
 
-**Core Requirements:**
+### Core Requirements:
 
 ```
 transformers>=4.36.0
@@ -119,7 +150,7 @@ pillow>=10.0.0
 numpy>=1.24.0
 ```
 
-**Optional (for Jupyter notebooks):**
+### Optional (for Jupyter notebooks):
 
 ```
 jupyter>=1.0.0
@@ -148,21 +179,56 @@ After running these demos, you should:
 
 ## Troubleshooting
 
-**Model download slow?**
+### Model download slow?
 
 - Models will download automatically on first run
 - CLIP: ~600 MB, BLIP: ~1 GB
 - Pre-download before class if possible
 
-**GPU not detected?**
+### GPU not detected?
 
 - Demos work fine on CPU (just slower)
 - Expect 2-5 seconds per image on CPU
 
-**Import errors?**
+### Import errors?
 
 - Run `pip install -r requirements.txt` again
 - Make sure you're in the virtual environment
+- You should see `(venv)` in your terminal/command prompt
+
+### Virtual environment activation issues (Windows PowerShell)?
+
+If you get an error about execution policies:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+## Platform-Specific Notes
+
+### Mac
+
+- Use `python3` instead of `python` if you have multiple Python versions
+- You may need to install Xcode Command Line Tools: `xcode-select --install`
+
+### Linux
+
+- Ubuntu/Debian: You may need to install `python3-venv` first:
+
+```bash
+  sudo apt-get install python3-venv
+```
+
+- Some distributions may require `python3-pip`:
+
+```bash
+  sudo apt-get install python3-pip
+```
+
+### Windows
+
+- Use Command Prompt or PowerShell (not Git Bash for activation)
+- If using Anaconda, you can skip virtual environment creation and use conda directly
 
 ## References
 
