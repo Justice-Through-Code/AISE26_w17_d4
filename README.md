@@ -64,6 +64,18 @@ python demos/01_clip_retrieval.py
 python demos/02_image_captioning.py
 ```
 
+**Demo 3: Whisper Audio Transcription (Optional)**
+
+```bash
+python demos/03_whisper_transcription.py
+```
+
+To see setup instructions for audio files:
+
+```bash
+python demos/03_whisper_transcription.py --setup-info
+```
+
 ## What's Included
 
 ### Demo 1: CLIP Text-to-Image Retrieval
@@ -124,19 +136,74 @@ print(f"Caption: {caption}")
 - Confidence scores help, but aren't foolproof
 - Ground truth captions are essential for validation
 
+### Demo 3: Whisper Audio Transcription (Optional)
+
+**File:** `demos/03_whisper_transcription.py`
+
+**What it does:**
+
+- Loads OpenAI's Whisper model for automatic speech recognition
+- Transcribes audio files (.wav, .mp3) to text
+- Analyzes audio quality and provides confidence estimates
+- Demonstrates stress testing with various audio conditions
+
+**Example Usage:**
+
+```python
+from demos.whisper_transcription import AudioTranscriber
+
+transcriber = AudioTranscriber(model_name="openai/whisper-tiny")
+result = transcriber.transcribe_audio("data/audio/clear_speech.wav")
+print(f"Transcription: {result['text']}")
+```
+
+**Key Teaching Points:**
+
+- Whisper handles multiple languages and accents out-of-the-box
+- Background noise significantly degrades transcription quality
+- Very short clips (< 2 seconds) may lack sufficient context
+- Audio stress testing is critical (noise, accents, overlapping speakers)
+- Fallback behavior needed for low-confidence transcriptions
+
+**Stress Test Checklist:**
+
+- ☐ Background noise (traffic, music, crowd)
+- ☐ Various accents and dialects
+- ☐ Overlapping speakers
+- ☐ Very short clips (< 2 seconds)
+- ☐ Low volume / quiet speech
+- ☐ Fast speech
+
+**Setting up audio files:**
+
+Run with `--setup-info` flag to see detailed instructions for creating sample audio files:
+
+```bash
+python demos/03_whisper_transcription.py --setup-info
+```
+
+**Suggested test files:**
+
+- `clear_speech.wav` - Clean recording in quiet environment
+- `noisy_speech.wav` - Recording with background noise
+- `accent_speech.wav` - Different accent or non-native speaker
+- `short_clip.wav` - Very short clip (< 2 seconds)
+
 ## Repository Structure
 
 ```
 jtc-w17d4-demos/
-├── README.md                    # This file
-├── requirements.txt             # Python dependencies
+├── README.md                       # This file
+├── requirements.txt                # Python dependencies
 ├── data/
-│   └── images/                  # Sample images for testing
+│   ├── images/                     # Sample images for testing
+│   └── audio/                      # Sample audio files for Whisper demo
 ├── demos/
-│   ├── 01_clip_retrieval.py    # CLIP text-to-image retrieval
-│   ├── 02_image_captioning.py  # BLIP image captioning
-│   └── utils.py                # Shared utility functions
-└── outputs/                     # Generated outputs (created at runtime)
+│   ├── 01_clip_retrieval.py       # CLIP text-to-image retrieval
+│   ├── 02_image_captioning.py     # BLIP image captioning
+│   ├── 03_whisper_transcription.py # Whisper audio transcription (optional)
+│   └── utils.py                   # Shared utility functions
+└── outputs/                        # Generated outputs (created at runtime)
 ```
 
 ## Dependencies
@@ -150,6 +217,13 @@ pillow>=10.0.0
 numpy>=1.24.0
 ```
 
+### Optional (for Whisper audio demo):
+
+```
+librosa>=0.10.0
+soundfile>=0.12.0
+```
+
 ### Optional (for Jupyter notebooks):
 
 ```
@@ -161,12 +235,14 @@ matplotlib>=3.7.0
 
 Each demo maps to specific learning objectives:
 
-| Demo            | Learning Objective                                            |
-| --------------- | ------------------------------------------------------------- |
-| CLIP Retrieval  | Explain dual encoders and shared embedding space              |
-| CLIP Retrieval  | Understand similarity scoring and top-k retrieval             |
-| BLIP Captioning | Contrast retrieval (safer) vs generation (hallucination risk) |
-| All Demos       | Use Transformers pipelines for reproducible inference         |
+| Demo                | Learning Objective                                            |
+| ------------------- | ------------------------------------------------------------- |
+| CLIP Retrieval      | Explain dual encoders and shared embedding space              |
+| CLIP Retrieval      | Understand similarity scoring and top-k retrieval             |
+| BLIP Captioning     | Contrast retrieval (safer) vs generation (hallucination risk) |
+| Whisper ASR         | Understand audio modality stress testing (noise, accents)     |
+| Whisper ASR         | Implement multimodal evaluation with slice-based testing      |
+| All Demos           | Use Transformers pipelines for reproducible inference         |
 
 ## Next Steps for Students
 
@@ -204,6 +280,13 @@ If you get an error about execution policies:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
+### Audio demo not working?
+
+- Make sure you've installed the audio dependencies: `pip install librosa soundfile`
+- Whisper model (tiny) is ~39 MB and downloads on first run
+- If you don't have audio files, run with `--setup-info` flag for instructions
+- Supported formats: .wav, .mp3, .flac, .m4a
+
 ## Platform-Specific Notes
 
 ### Mac
@@ -234,7 +317,9 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 - CLIP Paper: https://arxiv.org/abs/2103.00020
 - BLIP Paper: https://arxiv.org/abs/2201.12086
-- Hugging Face Docs: https://huggingface.co/docs/transformers/
+- Whisper Paper: https://arxiv.org/abs/2212.04356
+- Hugging Face Transformers Docs: https://huggingface.co/docs/transformers/
+- Whisper Model Doc: https://huggingface.co/docs/transformers/en/model_doc/whisper
 
 ## License
 
