@@ -9,8 +9,8 @@ This repository contains working code examples demonstrated during W17D4 class s
 #### Clone repository
 
 ```bash
-git clone <https://github.com/your-org/jtc-w17d4-demos.git>
-cd jtc-w17d4-demos
+git clone https://github.com/Justice-Through-Code/AISE26_w17_d4.git
+cd AISE26_w17_d4/aise26-w17d4-demos
 ```
 
 #### Create virtual environment
@@ -43,6 +43,8 @@ python -m venv venv
 ```bash
 pip install -r requirements.txt
 ```
+
+**Note:** This installs all dependencies including audio libraries (librosa, soundfile) needed for the Whisper demo.
 
 #### Download sample images (or use your own)
 
@@ -192,7 +194,7 @@ python demos/03_whisper_transcription.py --setup-info
 ## Repository Structure
 
 ```
-jtc-w17d4-demos/
+aise26-w17d4-demos/
 ├── README.md                       # This file
 ├── requirements.txt                # Python dependencies
 ├── data/
@@ -208,6 +210,11 @@ jtc-w17d4-demos/
 
 ## Dependencies
 
+**All dependencies are included in `requirements.txt` and install with one command:**
+```bash
+pip install -r requirements.txt
+```
+
 ### Core Requirements:
 
 ```
@@ -217,14 +224,14 @@ pillow>=10.0.0
 numpy>=1.24.0
 ```
 
-### Optional (for Whisper audio demo):
+### Audio Libraries (for Whisper demo):
 
 ```
 librosa>=0.10.0
 soundfile>=0.12.0
 ```
 
-### Optional (for Jupyter notebooks):
+### Development Tools (optional):
 
 ```
 jupyter>=1.0.0
@@ -282,7 +289,8 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 
 ### Audio demo not working?
 
-- Make sure you've installed the audio dependencies: `pip install librosa soundfile`
+- Make sure you've installed all dependencies: `pip install -r requirements.txt` (includes audio libraries)
+- If you already ran requirements.txt but get import errors, try: `pip install --upgrade librosa soundfile`
 - Whisper model (tiny) is ~39 MB and downloads on first run
 - If you don't have audio files, run with `--setup-info` flag for instructions
 - Supported formats: .wav, .mp3, .flac, .m4a
