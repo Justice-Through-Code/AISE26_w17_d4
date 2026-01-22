@@ -1,0 +1,169 @@
+# Test Plan - [Your Feature Name]
+
+**Team Members:** [Your Name(s)]
+
+**Feature:** [CLIP Retrieval / Image Captioning / Audio Transcription]
+
+---
+
+## Test Case Summary
+
+| Category | Count |
+|----------|-------|
+| Normal Baseline | 4 |
+| Vision Stress (Blur) | [0-1] |
+| Vision Stress (Low Light) | [0-1] |
+| Vision Stress (Clutter) | [0-1] |
+| Vision Stress (Small Text) | [0-1] |
+| Vision Stress (Occlusion) | [0-1] |
+| Uncertain / Refuse | 2 |
+| **Total** | **10+** |
+
+---
+
+## Evidence Table
+
+| test_case_id | input_description | expected_behavior | actual_output | pass_fail | notes_next_step |
+|--------------|-------------------|-------------------|---------------|-----------|-----------------|
+| normal_01 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| normal_02 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| normal_03 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| normal_04 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| vision_[type]_01 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| vision_[type]_02 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| vision_[type]_03 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| vision_[type]_04 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| uncertain_01 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+| uncertain_02 | [Description] | [Expected] | [To be filled after running tests] | ✅/❌ | [Notes] |
+
+---
+
+## Detailed Test Cases
+
+### Normal Baseline Cases
+
+#### Test Case: normal_01
+- **Input:** [e.g., "Clear image of golden retriever in park, sharp focus, good lighting"]
+- **Query (if applicable):** [e.g., "golden retriever"]
+- **Expected Behavior:** [e.g., "Top-1 result is 'dog' or 'golden retriever' with confidence >0.8"]
+- **Rationale:** [e.g., "Verify baseline functionality on ideal input"]
+
+#### Test Case: normal_02
+- **Input:** [Description]
+- **Query (if applicable):** [Query]
+- **Expected Behavior:** [Expected]
+- **Rationale:** [Why this test matters]
+
+#### Test Case: normal_03
+- **Input:** [Description]
+- **Query (if applicable):** [Query]
+- **Expected Behavior:** [Expected]
+- **Rationale:** [Why this test matters]
+
+#### Test Case: normal_04
+- **Input:** [Description]
+- **Query (if applicable):** [Query]
+- **Expected Behavior:** [Expected]
+- **Rationale:** [Why this test matters]
+
+---
+
+### Vision Stress Cases
+
+#### Test Case: vision_blur_01
+- **Input:** [e.g., "Dog running, motion blur (shutter speed 1/30s), subject velocity ~5 m/s"]
+- **Stress Factor:** Blur (motion)
+- **Expected Behavior:** [e.g., "Top-1 similarity <0.6 OR fallback triggered"]
+- **Why This Matters:** [e.g., "Mobile photos often have motion blur; system must handle gracefully"]
+
+#### Test Case: vision_lowlight_01
+- **Input:** [Description]
+- **Stress Factor:** Low Light
+- **Expected Behavior:** [Expected]
+- **Why This Matters:** [Rationale]
+
+#### Test Case: vision_clutter_01
+- **Input:** [Description]
+- **Stress Factor:** Clutter
+- **Expected Behavior:** [Expected]
+- **Why This Matters:** [Rationale]
+
+#### Test Case: vision_smalltext_01
+- **Input:** [Description]
+- **Stress Factor:** Small Text / OCR
+- **Expected Behavior:** [Expected]
+- **Why This Matters:** [Rationale]
+
+---
+
+### Uncertain / Refuse Cases
+
+#### Test Case: uncertain_01
+- **Input:** [e.g., "Abstract blob image, no clear object, noisy sensor data"]
+- **Expected Behavior:** [e.g., "System refuses to caption OR shows fallback with 'low confidence' message"]
+- **Why This Matters:** [e.g., "Prevents confident wrong answers on ambiguous inputs"]
+
+#### Test Case: uncertain_02
+- **Input:** [Description]
+- **Expected Behavior:** [Expected]
+- **Why This Matters:** [Rationale]
+
+---
+
+## Fallback UX Text
+
+### Trigger Condition
+**When does fallback activate?**
+- [e.g., "If top-1 similarity score < 0.6"]
+- [e.g., "If caption confidence < 70%"]
+- [e.g., "If transcription has >10% [unintelligible] markers"]
+
+### User-Facing Message
+
+**Exact text shown to user:**
+
+```
+[Insert exact UX text here]
+
+Example:
+
+⚠️ Low Confidence Match
+
+We're not confident in this result. Here are the top 3 possibilities:
+
+1. [Result 1] (52% match)
+2. [Result 2] (48% match)
+3. [Result 3] (45% match)
+
+💡 Try a more specific search or upload a clearer image.
+```
+
+---
+
+## Test Execution Plan
+
+### When to Run Tests
+- [ ] After initial implementation (before considering it "done")
+- [ ] After any model changes or updates
+- [ ] Before deploying to production
+
+### How to Run Tests
+1. [e.g., "Load test images from `data/images/` directory"]
+2. [e.g., "Run `python src/test_runner.py --test-plan TEST_PLAN.md`"]
+3. [e.g., "Log outputs to `RESULTS.md`"]
+4. [e.g., "Review failures and update LIMITATIONS.md"]
+
+### Pass/Fail Criteria
+- **Pass Threshold:** [e.g., "≥8 of 10 tests pass"]
+- **Required Failures:** [e.g., "Must have ≥2 documented failures to validate test rigor"]
+
+---
+
+## Next Steps After Testing
+
+- [ ] Implement tests in code
+- [ ] Run all 10+ test cases
+- [ ] Log results in RESULTS.md evidence table
+- [ ] Categorize failures (blur, low-light, hallucination, etc.)
+- [ ] Write LIMITATIONS.md based on observed failures
+- [ ] Define next improvements (targeted tests, data, model changes)

@@ -1,0 +1,168 @@
+# Test Results - [Your Feature Name]
+
+**Team Members:** [Your Name(s)]
+
+**Feature:** [CLIP Retrieval / Image Captioning / Audio Transcription]
+
+**Test Date:** [YYYY-MM-DD]
+
+---
+
+## Summary Statistics
+
+**Total Tests:** [e.g., 10]
+**Passed:** [e.g., 6] ✅
+**Failed:** [e.g., 4] ❌
+**Pass Rate:** [e.g., 60%]
+
+---
+
+## Evidence Table (FILLED)
+
+| test_case_id | input_description | expected_behavior | actual_output | pass_fail | notes_next_step |
+|--------------|-------------------|-------------------|---------------|-----------|-----------------|
+| normal_01 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ✅ | [Notes] |
+| normal_02 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ✅ | [Notes] |
+| normal_03 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ✅ | [Notes] |
+| normal_04 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ❌ | [Notes] |
+| vision_blur_01 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ❌ | [Notes] |
+| vision_lowlight_01 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ❌ | [Notes] |
+| vision_clutter_01 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ✅ | [Notes] |
+| vision_occlusion_01 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ❌ | [Notes] |
+| uncertain_01 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ✅ | [Notes] |
+| uncertain_02 | [Description] | [Expected] | **[ACTUAL OUTPUT FROM RUNNING TEST]** | ✅ | [Notes] |
+
+---
+
+## Detailed Failure Analysis
+
+### Failure Category: Blur
+
+**Failed Tests:** [e.g., vision_blur_01, vision_blur_02]
+
+**Description:**
+[Describe what happened when testing blurred images]
+
+**Example Output:**
+```
+Query: "dog running"
+Expected: Top-1 similarity >0.7 OR fallback triggered
+Actual: Top-1: "cat" (0.48), Top-2: "dog" (0.45), Top-3: "wolf" (0.42)
+```
+
+**Root Cause:**
+[Why did this fail? e.g., "CLIP model lacks motion blur augmentation during training"]
+
+**Next Steps:**
+- [ ] Add blur augmentation to training data
+- [ ] Lower confidence threshold to trigger fallback
+- [ ] Add preprocessing step to detect blur
+
+---
+
+### Failure Category: Low Light
+
+**Failed Tests:** [e.g., vision_lowlight_01]
+
+**Description:**
+[Describe what happened when testing low-light images]
+
+**Example Output:**
+```
+Input: Dark indoor cat photo (ISO 6400)
+Expected: Caption includes "cat" with confidence >0.6
+Actual: Caption: "a shadow on a wall with a lamp" (confidence: 0.35)
+```
+
+**Root Cause:**
+[Why did this fail?]
+
+**Next Steps:**
+- [ ] Add low-light images to training set
+- [ ] Add brightness check before captioning
+- [ ] Trigger fallback for images with mean brightness <30
+
+---
+
+### Failure Category: [Another Category]
+
+**Failed Tests:** [e.g., test_id_1, test_id_2]
+
+**Description:**
+[Describe what happened]
+
+**Example Output:**
+```
+[Copy-paste actual output from running test]
+```
+
+**Root Cause:**
+[Why did this fail?]
+
+**Next Steps:**
+- [ ] [Action item 1]
+- [ ] [Action item 2]
+
+---
+
+## Screenshots / Saved Outputs
+
+### Example Failure: vision_blur_01
+
+![Blurred image input](outputs/failures/blur_01_input.jpg)
+
+**Output:**
+```
+Top-1: "cat" (0.48)
+Top-2: "dog" (0.45)
+Top-3: "wolf" (0.42)
+```
+
+**Expected:** Top-1 should be "dog" with confidence >0.7
+
+---
+
+### Example Failure: vision_lowlight_01
+
+![Low-light image input](outputs/failures/lowlight_01_input.jpg)
+
+**Caption Generated:** "a shadow on a wall with a lamp"
+
+**Expected:** Should include "cat" or trigger fallback
+
+---
+
+## Key Findings
+
+### What Worked Well ✅
+- [e.g., "Normal baseline cases all passed (4/4)"]
+- [e.g., "Fallback UX triggered correctly on uncertain inputs"]
+- [e.g., "Model handled clutter well (3/3 passed)"]
+
+### What Didn't Work ❌
+- [e.g., "Motion blur caused 100% failure rate (0/2 passed)"]
+- [e.g., "Low-light images caused hallucinations in 2/2 cases"]
+- [e.g., "Ambiguous queries returned mixed results without clarification"]
+
+### Surprises 🤔
+- [e.g., "Model unexpectedly handled occlusion better than expected"]
+- [e.g., "Clutter didn't degrade performance as much as predicted"]
+
+---
+
+## Next Steps
+
+### Immediate Fixes
+- [ ] Lower confidence threshold from 0.6 to 0.5 to trigger fallback more often
+- [ ] Add brightness check for images (reject if mean brightness <30)
+- [ ] Add blur detection preprocessing
+
+### Long-Term Improvements
+- [ ] Collect more training data for blur and low-light scenarios
+- [ ] Fine-tune model on domain-specific images
+- [ ] Add user feedback loop to collect real-world failures
+
+### For Assignment Submission
+- [ ] Update LIMITATIONS.md with quantitative failure rates
+- [ ] Include screenshots of representative failures
+- [ ] Document all 8+ failures in detail

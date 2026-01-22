@@ -1,0 +1,49 @@
+# Limitations - [Your Feature Name]
+
+**Word Count:** [80-120 words]
+
+---
+
+## Evidence-Driven Limitations
+
+[Write 80-120 words describing specific limitations based on your test results. Be quantitative where possible.]
+
+**Example (GOOD):**
+
+This CLIP retrieval system fails on motion-blurred images with object motion >5 m/s (tested on 5 cases, 4 failed). Accuracy drops from 85% on clean images to 52% on low-light scenes (ISO >3200). Ambiguous queries like "animal" return mixed results (dogs, cats, birds) without disambiguation. The system cannot handle queries with typos and will return irrelevant results. Designed for well-lit, sharp photos with clear subjects. Not suitable for nighttime photography or action shots without additional training data.
+
+---
+
+## Requirements Checklist
+
+Before submitting, verify:
+
+- [ ] 80-120 words (not more, not less)
+- [ ] Specific failure scenarios from your test results
+- [ ] Quantitative data where possible (percentages, thresholds, counts)
+- [ ] No generic disclaimers like "may not work in all cases"
+- [ ] Grounded in observed failures, not hypothetical edge cases
+
+---
+
+## Common Mistakes to Avoid
+
+❌ **Bad Example:**
+
+"This system may not work in all cases. Performance may vary depending on input quality. Users should verify results. Not guaranteed to be 100% accurate."
+
+**Why this is bad:**
+- Generic disclaimers (not specific)
+- No quantitative data
+- Doesn't reference actual test failures
+- Doesn't help users understand real limitations
+
+✅ **Good Example:**
+
+"This CLIP retrieval system fails on motion-blurred images with object motion >5 m/s (tested on 5 cases, 4 failed). Accuracy drops from 85% on clean images to 52% on low-light scenes (ISO >3200)..."
+
+**Why this is good:**
+- Specific failure scenarios
+- Quantitative data (percentages, thresholds)
+- References actual test results
+- Helps users understand when NOT to use the system

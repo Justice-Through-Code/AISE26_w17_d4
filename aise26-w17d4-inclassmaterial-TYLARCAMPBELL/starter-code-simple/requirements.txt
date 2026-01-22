@@ -1,0 +1,11 @@
+# W17D4 Assignment Requirements
+
+# Core dependencies
+transformers==4.36.0
+torch==2.1.0
+pillow==10.0.0
+numpy==1.24.0
+
+# Optional (for Whisper track)
+librosa>=0.10.0
+soundfile>=0.12.0

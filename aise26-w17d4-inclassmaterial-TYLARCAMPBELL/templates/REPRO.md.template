@@ -1,0 +1,240 @@
+# Reproduction Steps
+
+## Environment Setup
+
+**Python Version:** [e.g., 3.10.x]
+
+**Operating System:** [e.g., Windows 11, macOS 13, Ubuntu 22.04]
+
+**Hardware Requirements:**
+- CPU: [e.g., Any modern CPU]
+- RAM: [e.g., 8 GB minimum]
+- GPU: [e.g., Optional, but recommended for faster inference]
+- Storage: [e.g., 2 GB for models + dependencies]
+
+---
+
+## Step-by-Step Installation
+
+### 1. Clone Repository
+
+```bash
+git clone https://github.com/your-username/w17d4-assignment.git
+cd w17d4-assignment
+```
+
+### 2. Create Virtual Environment
+
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On macOS/Linux:
+source venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+**Expected Install Time:** [e.g., 2-3 minutes on a fast internet connection]
+
+**Expected Package Versions:**
+- transformers==4.36.0
+- torch==2.1.0
+- pillow==10.0.0
+- numpy==1.24.0
+
+---
+
+## Running the Pipeline
+
+### 4. Prepare Test Data
+
+**Option A: Use Provided Test Data**
+```bash
+# Test images are already included in data/images/
+ls data/images/
+```
+
+**Option B: Download Additional Test Data**
+```bash
+python scripts/download_data.py
+```
+
+---
+
+### 5. Index Images (for CLIP Retrieval)
+
+```bash
+python src/main.py --mode index --image-dir data/images/
+```
+
+**Expected Output:**
+```
+Loading CLIP model: openai/clip-vit-base-patch32
+Indexing 10 images...
+Indexed: dog_clear.jpg
+Indexed: dog_blurred.jpg
+...
+✅ Indexing complete. 10 images ready for search.
+```
+
+**Expected Runtime:** [e.g., ~30 seconds on CPU, ~5 seconds on GPU]
+
+---
+
+### 6. Run Test Suite
+
+```bash
+python src/test_runner.py --test-plan TEST_PLAN.md --output RESULTS.md
+```
+
+**Expected Output:**
+```
+Running 10 tests...
+✅ normal_01: PASS
+✅ normal_02: PASS
+❌ vision_blur_01: FAIL
+...
+8/10 tests passed, 2 failed
+Results written to RESULTS.md
+```
+
+**Expected Runtime:** [e.g., ~5 minutes on CPU]
+
+---
+
+### 7. View Results
+
+```bash
+# View test results
+cat RESULTS.md
+
+# View limitations
+cat LIMITATIONS.md
+```
+
+---
+
+## Running Individual Commands
+
+### Search for Images (CLIP Retrieval)
+
+```bash
+python src/main.py --mode search --query "a dog playing in a park"
+```
+
+**Expected Output:**
+```
+Query: "a dog playing in a park"
+Top 5 Results:
+1. dog_clear.jpg        - Score: 0.92
+2. dog_blurred.jpg      - Score: 0.68
+3. park_landscape.jpg   - Score: 0.55
+4. cat_portrait.jpg     - Score: 0.28
+5. market_cluttered.jpg - Score: 0.22
+```
+
+---
+
+### Generate Caption (BLIP)
+
+```bash
+python src/main.py --mode caption --image data/images/dog_clear.jpg
+```
+
+**Expected Output:**
+```
+Caption: "a golden retriever playing with a ball in a park"
+Confidence: High ✅
+```
+
+---
+
+## Troubleshooting
+
+### Issue: Model Download Fails
+
+**Error:** `ConnectionError: Failed to download model`
+
+**Solution:**
+- Check internet connection
+- Try downloading model manually:
+  ```bash
+  python -c "from transformers import CLIPModel; CLIPModel.from_pretrained('openai/clip-vit-base-patch32')"
+  ```
+
+---
+
+### Issue: CUDA Out of Memory
+
+**Error:** `RuntimeError: CUDA out of memory`
+
+**Solution:**
+- Use CPU instead of GPU by setting:
+  ```bash
+  export CUDA_VISIBLE_DEVICES=""
+  ```
+- Or reduce batch size in config
+
+---
+
+### Issue: Import Errors
+
+**Error:** `ModuleNotFoundError: No module named 'transformers'`
+
+**Solution:**
+- Make sure virtual environment is activated
+- Reinstall dependencies:
+  ```bash
+  pip install -r requirements.txt
+  ```
+
+---
+
+## Verification Checklist
+
+Before submitting, verify:
+
+- [ ] All commands run without errors
+- [ ] Test suite completes and writes RESULTS.md
+- [ ] At least 8 failures are documented
+- [ ] LIMITATIONS.md is populated with evidence-driven content
+- [ ] A reviewer can run your code without asking questions
+
+---
+
+## Expected Outputs Summary
+
+**Files Created:**
+- `RESULTS.md` - Filled evidence table with actual test outputs
+- `outputs/failures/` - Screenshots of representative failures
+- `outputs/embeddings/` - Cached embeddings (if using CLIP)
+
+**Console Output:**
+- Model loading messages
+- Test execution progress (X/10 passed)
+- Warnings for low-confidence results
+- Final summary statistics
+
+**Runtime:**
+- Total setup time: [e.g., 3-5 minutes]
+- Test execution time: [e.g., 5-10 minutes on CPU]
+- Total time: [e.g., 10-15 minutes from clone to results]
+
+---
+
+## Contact
+
+**Questions?** Post on Ed Discussion or come to office hours.
+
+**Issues with reproduction?** Please file an issue on GitHub with:
+- Your OS and Python version
+- Full error message
+- Steps you've tried
