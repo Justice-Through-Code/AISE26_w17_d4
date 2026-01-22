@@ -66,22 +66,26 @@ def demo_image_captioning():
 
     captioner = ImageCaptioner()
 
+    # Build correct path relative to script location
+    script_dir = Path(__file__).parent
+    image_dir = script_dir.parent / "data" / "images"
+    
     # Test images
     test_images = [
-        "data/images/dog_clear.jpg",
-        "data/images/cat_lowlight.jpg",
-        "data/images/market_cluttered.jpg"
+        image_dir / "dog_clear.jpg",
+        image_dir / "cat_lowlight.jpg",
+        image_dir / "market_cluttered.jpg"
     ]
 
     for img_path in test_images:
-        if not Path(img_path).exists():
+        if not img_path.exists():
             print(f"\n⚠️  Image not found: {img_path}")
             continue
 
         print("\n" + "-" * 60)
-        print(f"Processing: {Path(img_path).name}")
+        print(f"Processing: {img_path.name}")
 
-        caption, confidence = captioner.caption_with_confidence(img_path)
+        caption, confidence = captioner.caption_with_confidence(str(img_path))
 
         print(f"Caption: \"{caption}\"")
         print(f"Confidence: {confidence}", end="")

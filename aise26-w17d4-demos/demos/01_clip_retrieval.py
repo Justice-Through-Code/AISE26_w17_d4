@@ -93,8 +93,10 @@ def demo_clip_retrieval():
     # Initialize retriever
     retriever = CLIPRetriever()
 
-    # Index images
-    retriever.index_images("data/images/")
+    # Index images - use path relative to script location
+    script_dir = Path(__file__).parent
+    image_path = script_dir.parent / "data" / "images"
+    retriever.index_images(str(image_path))
 
     # Example queries
     queries = [
